@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV Concurso de Tecnología, Innovación y Robótica Educativa</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --color-principal: #004A87;
+            --color-secundario: #00A8E8;
+            --color-accento: #FF6B35;
+            --color-fondo: #0A1929;
+            --color-texto: #E8F1F5;
+            --color-borde: #1E3A5C;
+            --color-tarjeta: #162B4D;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--color-texto);
+            background: linear-gradient(135deg, var(--color-fondo) 0%, #0D2342 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 168, 232, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 74, 135, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 25, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--color-secundario);
+        }
+        
+        .main-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px 0;
+        }
+        
+        .nav-item {
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .nav-link {
+            color: var(--color-texto);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-secundario);
+            border-color: var(--color-secundario);
+            box-shadow: 0 0 15px rgba(0, 168, 232, 0.3);
+            background: rgba(0, 168, 232, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 168, 232, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 2s ease-in-out;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-texto);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--color-secundario) 0%, var(--color-accento) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 168, 232, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-top: 40px;
+            color: var(--color-secundario);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-secundario), transparent);
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            color: var(--color-secundario);
+        }
+        
+        h4 {
+            font-size: 1.3rem;
+            margin-top: 20px;
+            color: var(--color-accento);
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 168, 232, 0.3);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(0, 168, 232, 0.6), 0 0 40px rgba(255, 107, 53, 0.3);
+            }
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        li::before {
+            content: '▸';
+            color: var(--color-accento);
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: var(--color-tarjeta);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-borde);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        table:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 168, 232, 0.2);
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        td {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--color-borde);
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        tr:hover td {
+            background-color: rgba(0, 168, 232, 0.1);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        section {
+            background: var(--color-tarjeta);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--color-borde);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease;
+            scroll-margin-top: 100px;
+        }
+        
+        section.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-accento), transparent);
+            animation: scanline 3s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .categoria {
+            margin-bottom: 40px;
+            padding: 30px;
+            border: 1px solid var(--color-borde);
+            border-radius: 15px;
+            background: rgba(22, 43, 77, 0.8);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .categoria:hover {
+            border-color: var(--color-secundario);
+            box-shadow: 0 10px 25px rgba(0, 168, 232, 0.2);
+        }
+        
+        .categoria h3 {
+            color: var(--color-accento);
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--color-borde);
+        }
+        
+        a {
+            color: var(--color-secundario);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        a:hover {
+            color: var(--color-accento);
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+        
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accento);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(135deg, rgba(10, 25, 41, 0.9) 0%, rgba(22, 43, 77, 0.9) 100%);
+            border-bottom: 3px solid var(--color-secundario);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(0, 168, 232, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--color-texto);
+            margin-bottom: 25px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .highlight {
+            color: var(--color-accento);
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-fondo) 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            border-top: 3px solid var(--color-accento);
+        }
+        
+        footer p {
+            margin-bottom: 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        strong {
+            color: var(--color-accento);
+            font-weight: 600;
+        }
+        
+        em {
+            color: #A0B3C6;
+            font-style: italic;
+        }
+        
+        .tech-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 168, 232, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 168, 232, 0.5);
+        }
+        
+        .tech-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .tech-button:hover::before {
+            left: 100%;
+        }
+        
+        .agenda-container {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(22, 43, 77, 0.8);
+            border-radius: 15px;
+            border: 1px solid var(--color-borde);
+        }
+        
+        .agenda-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(10, 25, 41, 0.6);
+            border-radius: 10px;
+            border-left: 4px solid var(--color-accento);
+        }
+        
+        .agenda-time {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--color-secundario);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .agenda-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--color-texto);
+        }
+        
+        .agenda-desc {
+            color: #A0B3C6;
+            font-size: 0.95rem;
+        }
+        
+        .carrusel-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-borde);
+        }
+        
+        .carrusel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carrusel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .carrusel-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .carrusel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 25, 41, 0.85);
+            color: var(--color-texto);
+            padding: 20px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            z-index: 10;
+        }
+        
+        .carrusel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 74, 135, 0.7);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+        
+        .carrusel-btn:hover {
+            background: var(--color-principal);
+            box-shadow: 0 0 15px rgba(0, 168, 232, 0.5);
+        }
+        
+        .carrusel-prev {
+            left: 20px;
+        }
+        
+        .carrusel-next {
+            right: 20px;
+        }
+        
+        .carrusel-indicators {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 20;
+        }
+        
+        .carrusel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carrusel-indicator.active {
+            background: var(--color-accento);
+            transform: scale(1.2);
+        }
+        
+        .finalistas-container {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(22, 43, 77, 0.8);
+            border-radius: 15px;
+            border: 1px solid var(--color-borde);
+        }
+        
+        .finalistas-categoria {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(10, 25, 41, 0.6);
+            border-radius: 10px;
+            border-left: 4px solid var(--color-secundario);
+        }
+        
+        .finalistas-categoria h4 {
+            color: var(--color-accento);
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--color-borde);
+        }
+        
+        .finalistas-equipo {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+        
+        .finalistas-institucion {
+            font-weight: bold;
+            color: var(--color-secundario);
+            margin-bottom: 5px;
+        }
+        
+        .finalistas-nombre {
+            color: var(--color-texto);
+            font-style: italic;
+        }
+        
+        .header-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto; 
+            object-fit: contain;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--color-secundario);
+        }
+        
+        .inscripcion-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ganadores-info {
+            text-align: center;
+            padding: 30px;
+            background: rgba(22, 43, 77, 0.8);
+            border-radius: 15px;
+            border: 1px solid var(--color-borde);
+            margin-top: 30px;
+        }
+        
+        .mini-carrusel-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-borde);
+        }
+        
+        .mini-carrusel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .mini-carrusel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .mini-carrusel-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .mini-carrusel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 25, 41, 0.85);
+            color: var(--color-texto);
+            padding: 15px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            z-index: 10;
+        }
+        
+        .mini-carrusel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 74, 135, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+        
+        .mini-carrusel-btn:hover {
+            background: var(--color-principal);
+            box-shadow: 0 0 15px rgba(0, 168, 232, 0.5);
+        }
+        
+        .mini-carrusel-prev {
+            left: 15px;
+        }
+        
+        .mini-carrusel-next {
+            right: 15px;
+        }
+        
+        .mini-carrusel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 20;
+        }
+        
+        .mini-carrusel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mini-carrusel-indicator.active {
+            background: var(--color-accento);
+            transform: scale(1.2);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 25px;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 12px 15px;
+            }
+            
+            .carrusel-img {
+                height: 350px;
+            }
+            
+            .carrusel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .carrusel-indicators {
+                bottom: 70px;
+            }
+            
+            .header-image {
+                height: 250px;
+            }
+            
+            .inscripcion-image {
+                height: 200px;
+            }
+            
+            .mini-carrusel-img {
+                height: 200px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1001;
+                background: var(--color-principal);
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 0 20px rgba(0, 168, 232, 0.4);
+            }
+            
+            .nav-container {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(10, 25, 41, 0.98);
+                backdrop-filter: blur(20px);
+                transition: left 0.3s ease;
+                z-index: 1000;
+                padding-top: 80px;
+            }
+            
+            .nav-container.active {
+                left: 0;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-item {
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 15px 20px;
+                border-radius: 0;
+                border: none;
+                border-bottom: 1px solid var(--color-borde);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .carrusel-img {
+                height: 250px;
+            }
+            
+            .carrusel-indicators {
+                bottom: 60px;
+            }
+            
+            .header-image {
+                height: 200px;
+            }
+            
+            .inscripcion-image {
+                height: 150px;
+            }
+            
+            .mini-carrusel-img {
+                height: 150px;
+            }
+        }
+        
+        .scroll-effect {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-effect.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        #inscripcion {
+            background: linear-gradient(135deg, var(--color-tarjeta) 0%, #1A365D 100%);
+            border-left: 5px solid var(--color-accento);
+        }
+        
+        #cronograma table {
+            margin-top: 20px;
+        }
+        
+        section ul li, section ol li {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <nav class="main-nav">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#presentacion" class="nav-link">Presentación</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#cronograma" class="nav-link">Cronograma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#inscripcion" class="nav-link">Inscripción</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#categorias" class="nav-link">Categorías</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#finalistas" class="nav-link">Finalistas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#agenda" class="nav-link">Agenda</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#ganadores" class="nav-link">Ganadores</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#galeria" class="nav-link">Galería</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <button class="mobile-menu-btn">☰</button>
+
+    <div class="container">
+        <header>
+            <h1>IV Concurso de Tecnología, Innovación y Robótica Educativa</h1>
+            <img src="https://tair.xn--codisea-9za.com/wp-content/uploads/2025/10/Logo-GINFED.jpg" alt="Concurso de Tecnología" class="header-image">
+            <img src="https://tair.xn--codisea-9za.com/wp-content/uploads/2025/10/BannerHorinzontalIVConcursoRobotica.png" alt="Concurso de Tecnología" class="header-image">
+            <div class="subtitle">Demuestra tu talento en robótica e innovación</div>
+            <p class="highlight">¡Inscríbete y sé parte de esta gran experiencia tecnológica!</p>
+        </header>
+
+        <section id="presentacion" class="scroll-effect">
+            <h2>Presentación</h2>
+            <p>La Universidad del Magdalena, desde la Facultad de Ciencias de la Educación, el programa de Licenciatura en Tecnología y el grupo de Investigación en Informática Educativa – GINFED de la Facultad de Ciencias de la Educación con apoyo de las Vicerrectorías de Investigación y Extensión, desean con este concurso reconocer el trabajo de los docentes y estudiantes tanto al interior de la universidad como de los colegios e Instituciones Educativas que han introducido prácticas pedagógicas innovadoras.</p>
+        </section>
+
+        <section id="cronograma" class="scroll-effect">
+            <h2>Cronograma</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fase</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fase 1</strong></td>
+                        <td>Lunes, 11 de agosto de 2025. 4:00 P.M.</td>
+                        <td>Lanzamiento IV Concurso de Tecnología, Innovación y Robótica Educativa.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 2</strong></td>
+                        <td>Lunes 11 de agosto de 2025 hasta el viernes 3 de octubre de 2025.</td>
+                        <td>Inscripción al concurso diligenciando formulario.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 3</strong></td>
+                        <td>Hasta el martes 14 de octubre de 2025.</td>
+                        <td>Publicación de finalistas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 4</strong></td>
+                        <td>Jueves 30 de octubre de 2025, de 7:00 a.m. a 1:00 p.m.</td>
+                        <td>Socialización de proyectos en el campus de la Universidad del Magdalena y premiación de primeros lugares de cada categoría.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="inscripcion" class="scroll-effect">
+            <h2>Procesos de Inscripción</h2>
+            <img src="https://tair.xn--codisea-9za.com/wp-content/uploads/2025/10/Logo-GINFED.jpg" alt="Proceso de inscripción"  width="300px" height="auto">
+            <p>Diligencia el siguiente formulario de inscripción:</p>
+            <p><strong>Enlace de inscripción:</strong> <a href="https://forms.office.com/r/eSuukNAYyE" target="_blank">https://forms.office.com/r/eSuukNAYyE</a></p>
+            <a href="https://forms.office.com/r/eSuukNAYyE" target="_blank" class="tech-button">¡Inscríbete Aquí!</a>
+        </section>
+
+        <section id="categorias" class="scroll-effect">
+            <h2>Categorías de Participación</h2>
+            <p>Este concurso está diseñado para participar en 6 diferentes categorías:</p>
+            
+            <h3>CATEGORIA ESCOLAR:</h3>
+            <p>Todo equipo debe estar acompañado de un docente de la institución educativa y el número de participantes puede ser de 1 a 4 estudiantes.</p>
+            <ul>
+                <li><strong>Categoría 1:</strong> Estudiantes de Transición, Primero y Segundo grado.</li>
+                <li><strong>Categoría 2:</strong> Estudiantes de Tercero, Cuarto y Quinto grado.</li>
+                <li><strong>Categoría 3:</strong> Estudiantes de Sexto, Séptimo y Octavo grado.</li>
+                <li><strong>Categoría 4:</strong> Estudiantes de Noveno, Décimo y Undécimo grado. <em>La categoría 4 en esta versión tiene dos modalidades. Magdalena para instituciones educativas ubicadas en el departamento del Magdalena y Otros para instituciones educativas ubicadas en otros departamentos de Colombia.</em></li>
+            </ul>
+            
+            <h3>CATEGORIA UNIVERSITARIA:</h3>
+            <p>Todo equipo debe estar acompañado de un docente de la universidad y el número de participantes puede ser de 2 estudiantes de pregrado.</p>
+            <ul>
+                <li><strong>Categoría 5:</strong> Para estudiantes de Pregrado de la Universidad del Magdalena.</li>
+            </ul>
+            <p><strong>Vídeo para las categorías 1-5:</strong> Se les solicitará un vídeo corto en el que deben indicar la utilidad del proyecto, componentes y/o herramientas tecnológicas utilizadas, breve descripción del hardware y software.</p>
+            
+            <h3>CATEGORIAS INVENTOR:</h3>
+            <p>Todo equipo debe estar con un número de participantes de 2 estudiantes con habilidades potenciales en ensamble, configuración y programación en Robótica y Electrónica.</p>
+            <ul>
+                <li><strong>Categoría Maker Junior:</strong> Para estudiantes en los grados de 6° a 11°.</li>
+                <li><strong>Categoría Maker Senior:</strong> Para estudiantes de Pregrado de la Universidad del Magdalena.</li>
+            </ul>
+            <p><strong>Importante:</strong> Se les solicitará un vídeo corto mostrando las habilidades en: Programación Arduino y experiencia ensamblando componentes electrónicos como conexión de puente H y conexión de un motor DC.</p>
+            
+            <h4>Nota importante:</h4>
+            <p>Los estudiantes de la institución educativa o estudiantes de pregrado Unimagdalena son quienes deben presentar sus creaciones.</p>
+            
+            <h4>Recomendaciones:</h4>
+            <ul>
+                <li>Asegúrese de que el video cuente con un buen volumen de las personas que hablarán.</li>
+                <li>El video debe ser grabado en forma horizontal.</li>
+                <li>La duración máxima del video es de 3 minutos.</li>
+            </ul>
+            <p>Grupo que no tenga en consideración las anteriores recomendaciones tendrá una disminución de (-5) punto en la suma de la calificación que darán los miembros del jurado calificador.</p>
+        </section>
+
+        <section id="finalistas" class="scroll-effect">
+            <h2>Finalistas</h2>
+            <p><strong>Publicación de finalistas: 14 de octubre de 2025</strong></p>
+            
+            <div class="finalistas-container">
+                <div class="finalistas-categoria">
+                    <h4>CATEGORÍA 1 – HASTA 4TO GRADO (Mesas 1-6)</h4>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Colegio Americano del Caribe</div>
+                        <div class="finalistas-nombre">PEQUEÑOS CIENTÍFICOS, GRANDES IDEAS</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Colegio Americano del Caribe</div>
+                        <div class="finalistas-nombre">EXPLORADORES DE LA CIENCIA</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Institución Educativa San Juan del Córdoba</div>
+                        <div class="finalistas-nombre">"Ecobots Sanjuanistas"</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUTO MIXTO CORAZÓN DE MARÍA</div>
+                        <div class="finalistas-nombre">Sensor de Luz Nocturna</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUTO MIXTO CORAZÓN DE MARÍA</div>
+                        <div class="finalistas-nombre">Semáforo inteligente</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Colegio Americano del Caribe</div>
+                        <div class="finalistas-nombre">PODER TECNOKIDS</div>
+                    </div>
+                </div>
+                
+                <div class="finalistas-categoria">
+                    <h4>CATEGORÍA 2 – 5TO GRADO (Mesas 7-12)</h4>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">IETD LORENCITA VILLEGAS DE SANTOS</div>
+                        <div class="finalistas-nombre">Tecnología con sentido, Diversión con propósito</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Colegio Americano del Caribe</div>
+                        <div class="finalistas-nombre">MENTES BRILLANTES</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUTO MIXTO CORAZÓN DE MARÍA</div>
+                        <div class="finalistas-nombre">Minijardín inteligente</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUTO MIXTO CORAZÓN DE MARÍA</div>
+                        <div class="finalistas-nombre">Alarma de seguridad</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Institución Educativa Distrital ALUNA Jornada Mañana</div>
+                        <div class="finalistas-nombre">Fusión Innovadoras Alunistas</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Centro Pedagógico Mariel</div>
+                        <div class="finalistas-nombre">ANIMATRONICOS</div>
+                    </div>
+                </div>
+                
+                <div class="finalistas-categoria">
+                    <h4>CATEGORÍA 3: SEXTO, SÉPTIMO Y OCTAVO GRADO (Mesas 13-17)</h4>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUCION EDUCATIVA DEPARTAMENTAL ALFONSO LOPEZ</div>
+                        <div class="finalistas-nombre">Los duros/mejores del IDEAL (Morales, Rangel, Santiago y Paba)</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">IED ALUNA</div>
+                        <div class="finalistas-nombre">Tecnoalunistas/Innova Aluna (Quintero-Moncada)</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Colegio Franciscano San Luis Beltrán</div>
+                        <div class="finalistas-nombre">Conexión (Causado, Díaz, Mejía, Rada)</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUTO MIXTO CORAZÓN DE MARÍA</div>
+                        <div class="finalistas-nombre">INNOVA ICM (Gallardo, Navarro, Martínez)</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Instituto Nueva Enseñanza</div>
+                        <div class="finalistas-nombre">Visión al futuro (Mendoza, Blanco, Blanco)</div>
+                    </div>
+                </div>
+                
+                <div class="finalistas-categoria">
+                    <h4>CATEGORÍA 4: NOVENO, DÉCIMO Y UNDÉCIMO GRADO (Mesas 18-26)</h4>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Colegio Diocesano San José</div>
+                        <div class="finalistas-nombre">Excelsior</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">I. E. San Juan del Córdoba</div>
+                        <div class="finalistas-nombre">SANJUANISTA</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">I.E.D Aluna</div>
+                        <div class="finalistas-nombre">HIDROBOT</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">I.E.D. ONCE DE NOVIEMBRE</div>
+                        <div class="finalistas-nombre">LOS INFORMÁTICOS</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">IED Liceo Samario</div>
+                        <div class="finalistas-nombre">PROBOT</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">IED Madre Laura</div>
+                        <div class="finalistas-nombre">GreenHope</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">IED pedagógico del caribe</div>
+                        <div class="finalistas-nombre">TigresTic/ Luminatis</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Institución Educativa Distrital Bonda</div>
+                        <div class="finalistas-nombre">MasterBit</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Institución Educativa Distrital Laura Vicuña</div>
+                        <div class="finalistas-nombre">INNOVABOT</div>
+                    </div>
+                </div>
+                
+                <div class="finalistas-categoria">
+                    <h4>CATEGORÍA NACIONAL – 6TO A 11VO GRADO (Mesas 27-29)</h4>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUCIÓN EDUCATIVA AGROPECUARIA VERACRUZ</div>
+                        <div class="finalistas-nombre">POULTRONIC</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Institución Educativa Técnica Libardo Ramiro Muñoz</div>
+                        <div class="finalistas-nombre">Los Tecnológicos Ancestrales</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Institución Educativa Nuestra Señora de Fátima</div>
+                        <div class="finalistas-nombre">Proyecto de vida y redes sociales</div>
+                    </div>
+                </div>
+                
+                <div class="finalistas-categoria">
+                    <h4>CATEGORÍA 5 – PREGRADO UNIMAGDALENA (Mesas 30-32)</h4>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Lic. Tecnología</div>
+                        <div class="finalistas-nombre">Disrupción maker (Reales-Vergara)</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Lic. Tecnología</div>
+                        <div class="finalistas-nombre">DEMOTECH (Martínez Escorcia)</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Lic. Química</div>
+                        <div class="finalistas-nombre">Quimi-inos (Ovalle-Laguna)</div>
+                    </div>
+                </div>
+                
+                <div class="finalistas-categoria">
+                    <h4>CATEGORÍA MAKER JUNIOR - 6TO A 11VO GRADO (Mesas 33-37)</h4>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Colegio Franciscano San Luis Beltran</div>
+                        <div class="finalistas-nombre">Vyse</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUTO MIXTO CORAZÓN DE MARÍA</div>
+                        <div class="finalistas-nombre">INNOVA ICM ACEVEDO-FIGUEROA</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Liceo Versalles</div>
+                        <div class="finalistas-nombre">L V MAKERS</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">INSTITUTO MIXTO CORAZÓN DE MARÍA</div>
+                        <div class="finalistas-nombre">INNOVA ICM GALLARDO-MARTINEZ</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Colegio Franciscano San Luis Beltrán</div>
+                        <div class="finalistas-nombre">Los capytronicos</div>
+                    </div>
+                </div>
+                
+                <div class="finalistas-categoria">
+                    <h4>CATEGORÍA MAKER SENIOR – PREGRADO UNIMAGDALENA (Mesas 38-40)</h4>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Lic. Tecnología</div>
+                        <div class="finalistas-nombre">Maker Tech (Cervantes-Blanco)</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Lic. Tecnología</div>
+                        <div class="finalistas-nombre">GRUPO TECNO (Sáenz-Miranda)</div>
+                    </div>
+                    <div class="finalistas-equipo">
+                        <div class="finalistas-institucion">Lic. Tecnología/Ing. Electrónica</div>
+                        <div class="finalistas-nombre">Nexus (Agámez-Retamozo)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="agenda" class="scroll-effect">
+            <h2>Agenda del Evento</h2>
+            <div class="agenda-container">
+                <h3>Agenda del Día de la Final - Jueves 30 de Octubre</h3>
+                <p>La final del concurso hace parte de la programación de la FilSMar 2025</p>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">07:00-13:00</div>
+                    <div class="agenda-title">CONCURSO</div>
+                    <div class="agenda-desc">Final del IV concurso de Tecnología, Innovación y Robótica Educativa</div>
+                    <div class="agenda-desc"><strong>Convoca:</strong> Licenciatura en Tecnología, grupo GINFED, Facultad de Ciencias de la Educación, Vicerrectoría de Investigación y Vicerrectoría de Extensión.</div>
+                    <div class="agenda-desc"><strong>Lugar:</strong> Edificio de aulas Ciénaga Grande, espacio abierto </div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">7:00-8:00</div>
+                    <div class="agenda-title">Ubicación de finalistas</div>
+                    <div class="agenda-desc">Ubicación de finalistas en las mesas asignadas</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">8:00-8:30</div>
+                    <div class="agenda-title">Apertura de la final</div>
+                    <div class="agenda-desc">Apertura de la final del IV concurso</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">8:30-11:00</div>
+                    <div class="agenda-title">Exhibición y construcción</div>
+                    <div class="agenda-desc">Exhibición de los proyectos por los equipos finalistas de las categorías 1 - 5 y recorrido de los jurados por las mesas de los equipos finalistas</div>
+                    <div class="agenda-desc">Diseño y construcción de prototipos por los equipos finalistas de las categorías Maker Junior y Maker Senior</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">11:00-11:30</div>
+                    <div class="agenda-title">Puesta a prueba</div>
+                    <div class="agenda-desc">Puesta a prueba de prototipos desarrollados por los equipos finalistas de las categorías Maker Junior y Maker Senior y valoración de los prototipos por parte de los jurados</div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">11:30-13:00</div>
+                    <div class="agenda-title">Premiación y cierre</div>
+                    <div class="agenda-desc">Premiación y cierre del evento</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ganadores" class="scroll-effect">
+            <h2>Ganadores</h2>
+            <div class="ganadores-info">
+                <p>Los ganadores se anunciarán el 30 de octubre de 2025 durante el evento de exhibición y premiación. Se premiará el primer lugar de cada categoría.</p>
+                <img src="https://tair.xn--codisea-9za.com/wp-content/uploads/2025/10/BannerHorinzontalIVConcursoRobotica.png" alt="ganadores" class="inscripcion-image">
+                <p>© 2025 Universidad del Magdalena - Grupo de Investigación en Informática Educativa (GINFED)</p>
+                <p>Facultad de Ciencias de la Educación - Licenciatura en Tecnología</p>
+                <p>Con apoyo de las Vicerrectorías de Investigación y Extensión</p>
+            </div>
+        </section>
+
+        <section id="galeria" class="scroll-effect">
+            <h2>Galería</h2>
+            <p>Revive los momentos más destacados de las ediciones anteriores de nuestro concurso:</p>
+            
+            <div class="carrusel-container">
+                <div class="carrusel">
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 1 - Concurso II" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 1 - Concurso II</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 2 - Concurso II" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 2 - Concurso II</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 3 - Concurso II" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 3 - Concurso II</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 4 - Concurso II" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 4 - Concurso II</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 5 - Concurso II" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 5 - Concurso II</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 6 - Concurso II" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 6 - Concurso II</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 1 - Concurso III" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 1 - Concurso III</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 2 - Concurso III" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 2 - Concurso III</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 3 - Concurso III" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 3 - Concurso III</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 4 - Concurso III" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 4 - Concurso III</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 5 - Concurso III" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 5 - Concurso III</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Categoría 6 - Concurso III" class="carrusel-img">
+                        <div class="carrusel-caption">Categoría 6 - Concurso III</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Cierre del Concurso II" class="carrusel-img">
+                        <div class="carrusel-caption">Cierre del Concurso II</div>
+                    </div>
+                    <div class="carrusel-slide">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Cierre del Concurso III" class="carrusel-img">
+                        <div class="carrusel-caption">Cierre del Concurso III</div>
+                    </div>
+                </div>
+                
+                <button class="carrusel-btn carrusel-prev">&#10094;</button>
+                <button class="carrusel-btn carrusel-next">&#10095;</button>
+                
+                <div class="carrusel-indicators">
+                    <span class="carrusel-indicator active"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                    <span class="carrusel-indicator"></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="mini-carrusel-container">
+            <div class="mini-carrusel">
+                <div class="mini-carrusel-slide">
+                    <img src="https://tair.xn--codisea-9za.com/wp-content/uploads/2025/10/multimedia_1_20250819160634.608.png" alt="Evento 1" class="mini-carrusel-img">
+                    <div class="mini-carrusel-caption">Evento Tecnológico 2024</div>
+                </div>
+                <div class="mini-carrusel-slide">
+                    <img src="https://tair.xn--codisea-9za.com/wp-content/uploads/2025/10/BannerHorinzontalIVConcursoRobotica.png" alt="Evento 2" class="mini-carrusel-img">
+                    <div class="mini-carrusel-caption">Exhibición de Proyectos</div>
+                </div>
+                <div class="mini-carrusel-slide">
+                    <img src="https://tair.xn--codisea-9za.com/wp-content/uploads/2025/10/multimedia_3_20251015155759.125-scaled.png" alt="Evento 3" class="mini-carrusel-img">
+                    <div class="mini-carrusel-caption">Premiación 2023</div>
+                </div>
+            </div>
+            
+            <button class="mini-carrusel-btn mini-carrusel-prev">&#10094;</button>
+            <button class="mini-carrusel-btn mini-carrusel-next">&#10095;</button>
+            
+            <div class="mini-carrusel-indicators">
+                <span class="mini-carrusel-indicator active"></span>
+                <span class="mini-carrusel-indicator"></span>
+                <span class="mini-carrusel-indicator"></span>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Universidad del Magdalena | Licenciatura en Tecnología | Alt+Tend | Tair | Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navContainer = document.querySelector('.nav-container');
+            let scrollTimeout;
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        navContainer.classList.remove('active');
+                        
+                        const targetPosition = targetSection.offsetTop - 80;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navContainer.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!navContainer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navContainer.classList.remove('active');
+                }
+            });
+            
+            function updateActiveNav() {
+                const sections = document.querySelectorAll('section');
+                const scrollPos = window.scrollY + 100;
+                let currentActive = null;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        currentActive = sectionId;
+                    }
+                });
+                
+                if (currentActive) {
+                    navLinks.forEach(link => {
+                        const linkHref = link.getAttribute('href').substring(1);
+                        if (linkHref === currentActive) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            }
+            
+            const scrollElements = document.querySelectorAll('.scroll-effect');
+            
+            const elementInView = (el) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return elementTop <= window.innerHeight * 0.8;
+            };
+            
+            const displayScrollElement = (element) => {
+                element.classList.add('visible');
+            };
+            
+            const handleScrollAnimation = () => {
+                clearTimeout(scrollTimeout);
+                
+                scrollTimeout = setTimeout(() => {
+                    scrollElements.forEach((el) => {
+                        if (elementInView(el)) {
+                            displayScrollElement(el);
+                        }
+                    });
+                    updateActiveNav();
+                }, 10);
+            };
+            
+            const carrusel = document.querySelector('.carrusel');
+            const slides = document.querySelectorAll('.carrusel-slide');
+            const prevBtn = document.querySelector('.carrusel-prev');
+            const nextBtn = document.querySelector('.carrusel-next');
+            const indicators = document.querySelectorAll('.carrusel-indicator');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            function updateCarrusel() {
+                carrusel.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                indicators.forEach((indicator, index) => {
+                    if (index === currentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarrusel();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarrusel();
+            });
+            
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateCarrusel();
+                });
+            });
+            
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarrusel();
+            }, 5000);
+            
+            const miniCarrusel = document.querySelector('.mini-carrusel');
+            const miniSlides = document.querySelectorAll('.mini-carrusel-slide');
+            const miniPrevBtn = document.querySelector('.mini-carrusel-prev');
+            const miniNextBtn = document.querySelector('.mini-carrusel-next');
+            const miniIndicators = document.querySelectorAll('.mini-carrusel-indicator');
+            
+            let miniCurrentSlide = 0;
+            const miniTotalSlides = miniSlides.length;
+            
+            function updateMiniCarrusel() {
+                miniCarrusel.style.transform = `translateX(-${miniCurrentSlide * 100}%)`;
+                
+                miniIndicators.forEach((indicator, index) => {
+                    if (index === miniCurrentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            miniPrevBtn.addEventListener('click', () => {
+                miniCurrentSlide = (miniCurrentSlide - 1 + miniTotalSlides) % miniTotalSlides;
+                updateMiniCarrusel();
+            });
+            
+            miniNextBtn.addEventListener('click', () => {
+                miniCurrentSlide = (miniCurrentSlide + 1) % miniTotalSlides;
+                updateMiniCarrusel();
+            });
+            
+            miniIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    miniCurrentSlide = index;
+                    updateMiniCarrusel();
+                });
+            });
+            
+            setInterval(() => {
+                miniCurrentSlide = (miniCurrentSlide + 1) % miniTotalSlides;
+                updateMiniCarrusel();
+            }, 4000);
+            
+            window.addEventListener('scroll', handleScrollAnimation, { passive: true });
+            
+            handleScrollAnimation();
+        });
+    </script>
+</body>
+</html>
